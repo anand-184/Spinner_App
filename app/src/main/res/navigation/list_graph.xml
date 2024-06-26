@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list_graph.xml"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/spinner_fragmentFragment">
 
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.anand.spinner_app.MainFragment"
-        android:label="fragment_main_fragment"
-        tools:layout="@layout/fragment_main_fragment" />
-    <fragment
-        android:id="@+id/spinnerFragment"
+        android:id="@+id/spinner_fragmentFragment"
         android:name="com.anand.spinner_app.SpinnerFragment"
-        android:label="fragment_spinner_fragment"
+        android:label="fragment_main_fragment"
         tools:layout="@layout/fragment_spinner_fragment" />
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.anand.spinner_app.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" />
 </navigation>
