@@ -3,22 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/listFragment"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ListFragment">
-
-    <ListView
-        android:id="@+id/listView"
+    tools:context=".MainFragment">
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddList"
+        android:text="Spinner"
+        android:id="@+id/btnSpinner"/>
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_add_24" />
+        android:text="List View"
+        android:id="@+id/btnListView"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List Adapter"
+        android:id="@+id/btnListAdapter"/>
+
 
 
 </LinearLayout>

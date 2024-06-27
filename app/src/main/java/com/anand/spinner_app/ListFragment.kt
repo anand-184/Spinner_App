@@ -22,7 +22,7 @@ class ListFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     var listFragmentBinding:FragmentListBinding? = null
-    var citylist = mutableListOf<String>()
+    var citylist = arrayListOf<String>()
     lateinit var arrayAdapter: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,20 +43,22 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var arrayAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item,citylist)
+        var arrayAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_list_item_1,citylist)
         listFragmentBinding?.listView?.adapter = arrayAdapter
         listFragmentBinding?.fabAddList?.setOnClickListener {
             val customDialogBinding = CustomDialogBinding.inflate(layoutInflater)
             val dialog = Dialog(requireContext()).apply {
                 setContentView(customDialogBinding.root)
+                window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT)
                 show()
             }
-            customDialogBinding?.btnAdd?.setOnClickListener {
+            customDialogBinding.btnAdd.setOnClickListener {
                 if(customDialogBinding.etCity.text.toString().isNullOrEmpty()){
                     customDialogBinding.etCity.error = "Enter the City for List"
                 }else{
-                    citylist.add(customDialogBinding?.etCity?.text.toString())
+                    citylist.add(customDialogBinding.etCity.text.toString())
                 }
+                dialog.dismiss()
         }
 
 

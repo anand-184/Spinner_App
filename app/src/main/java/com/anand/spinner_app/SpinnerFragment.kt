@@ -45,10 +45,6 @@ class SpinnerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        spinnerFragmentBinding?.btnGoToListView?.setOnClickListener {
-            findNavController().navigate(R.id.listFragment)
-        }
-
 
         arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cityarray)
         spinnerFragmentBinding?.dynamicSpinner?.adapter = arrayAdapter
