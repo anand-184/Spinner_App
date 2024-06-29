@@ -32,7 +32,7 @@ class Data_Class_Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-      binding = FragmentDataClassBinding.inflate(layoutInflater)
+        binding = FragmentDataClassBinding.inflate(layoutInflater)
         return binding?.root
     }
 
