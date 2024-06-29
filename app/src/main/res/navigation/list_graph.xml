@@ -21,8 +21,9 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
     <fragment
-        android:id="@+id/listAdapterFragment"
-        android:name="com.anand.spinner_app.ListAdapter"
-        android:label="fragment_list_adapter"
-        tools:layout="@layout/fragment_list_adapter" />
+        android:id="@+id/data_Class_Fragment"
+        android:name="com.anand.spinner_app.Data_Class_Fragment"
+        android:label="fragment_data__class_"
+        tools:layout="@layout/fragment_data__class_" />
+
 </navigation>

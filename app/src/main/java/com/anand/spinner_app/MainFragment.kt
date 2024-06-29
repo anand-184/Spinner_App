@@ -45,6 +45,9 @@ class MainFragment : Fragment() {
         mainFragmentBinding?.btnListAdapter?.setOnClickListener {
             findNavController().navigate(R.id.listAdapterFragment)
         }
+        mainFragmentBinding?.btndataAdapter?.setOnClickListener {
+            findNavController()?.navigate(R.id.data_Class_Fragment)
+        }
     }
 
     companion object {
