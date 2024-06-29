@@ -53,46 +53,6 @@ class SpinnerFragment : Fragment() {
 
         arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cityarray)
         spinnerFragmentBinding?.dynamicSpinner?.adapter = arrayAdapter
-        spinnerFragmentBinding?.dynamicSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                var dialog = Dialog(requireContext()).apply {
-                    setContentView(R.layout.custom_dialog_selection)
-                    show()
-                    var selectedValue = spinnerFragmentBinding?.dynamicSpinner?.selectedItem as String
-                    var editvalue = findViewById<EditText>(R.id.etSelectedValue)
-                    var btnUpdate = findViewById<Button>(R.id.btnUpdate)
-                    editvalue.setText(selectedValue)
-                    btnUpdate.setOnClickListener {
-                        var selectedItemPosition = spinnerFragmentBinding?.dynamicSpinner?.selectedItemPosition as Int
-                        cityarray.set(selectedItemPosition,"$editvalue")
-                        dismiss()
-                    }
-                }
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-        }
-        spinnerFragmentBinding?.dynamicSpinner?.onItemLongClickListener = object :AdapterView.OnItemLongClickListener{
-            override fun onItemLongClick(
-                p0: AdapterView<*>?,
-                p1: View?,
-                p2: Int,
-                p3: Long
-            ): Boolean {
-                var selectedValue = spinnerFragmentBinding?.dynamicSpinner?.selectedItem as String
-                var alertDialog = AlertDialog.Builder(requireContext())
-                alertDialog.setTitle("Delete element")
-                alertDialog.setMessage("Do you want to delete $selectedValue")
-                alertDialog.setPositiveButton("yes"){_,_->
-                    cityarray.remove(selectedValue)
-                }
-                alertDialog.setNegativeButton("NO"){_,_->
-                    Toast.makeText(requireContext(),"No Changes ",Toast.LENGTH_LONG).show()
-                }
-                return true
-            }
-
-        }
         spinnerFragmentBinding?.fabAdd?.setOnClickListener {
             Dialog(requireContext()).apply {
                 setContentView(R.layout.custom_dialog)
