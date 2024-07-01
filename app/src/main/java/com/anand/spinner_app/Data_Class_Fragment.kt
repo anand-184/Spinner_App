@@ -42,49 +42,81 @@ class Data_Class_Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.listViewData?.adapter = StudentAdapter
-        binding?.listViewData?.setOnItemClickListener { _, _, _, _ ->
+        binding?.listViewData?.setOnItemClickListener { _, _, itemPosition, _ ->
             val customDialogBinding = CustomDialogSelectionBinding.inflate(layoutInflater)
             val customDialog = Dialog(requireContext()).apply {
-                setContentView(R.layout.custom_dialog_selection)
+                setContentView(customDialogBinding.root)
                 show()
                 window?.setLayout(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT
                 )
-            }
-            var selectedItem = binding?.listViewData?.selectedItem as StudentDataClass
-            val selectedItemPosition = binding?.listViewData?.selectedItemPosition as Int
-            customDialogBinding.btnUpdate.setOnClickListener {
-                if (customDialogBinding.etSelectedRoll.text.toString().isNullOrEmpty()) {
-                    customDialogBinding.etSelectedRoll.error = "Enter Roll No."
-                } else if (customDialogBinding.etSelectedName.text.toString().isNullOrEmpty()) {
-                    customDialogBinding.etSelectedName.error = "Enter your Name"
-                } else if (customDialogBinding.etSelectedCourse.text.toString()
-                        .isNullOrEmpty()
-                ) {
-                    customDialogBinding.etSelectedCourse.error = "Enter the Course"
-                } else {
-                    studentArray[selectedItemPosition] = StudentDataClass(
-                        "$customDialogBinding.etSelectedRoll",
-                        "$customDialogBinding.etUpdatedName",
-                        "$customDialogBinding.etUpdatedCourse"
-                    )
-                    customDialog.dismiss()
+                customDialogBinding.btnUpdate.setOnClickListener {
+                    if (customDialogBinding.etSelectedRoll.text.toString().isNullOrEmpty()) {
+                        customDialogBinding.etSelectedRoll.error = "Enter Roll No."
+                    } else if (customDialogBinding.etSelectedName.text.toString().isNullOrEmpty()) {
+                        customDialogBinding.etSelectedName.error = "Enter your Name"
+                    } else if (customDialogBinding.etSelectedCourse.text.toString()
+                            .isNullOrEmpty()
+                    ) {
+                        customDialogBinding.etSelectedCourse.error = "Enter the Course"
+                    } else {
+                        //  var selectedItemPosition = binding?.listViewData?.selectedItemPosition
+                        studentArray.set(
+                            itemPosition,
+                            StudentDataClass(
+                                "${customDialogBinding.etSelectedRoll.text.toString()}",
+                                "${customDialogBinding.etSelectedName.text.toString()}",
+                                "${customDialogBinding.etSelectedCourse.text.toString()}"
+                            )
+                        )
+                        StudentAdapter.notifyDataSetChanged()
+                        this.dismiss()
+                    }
                 }
             }
+            return@setOnItemClickListener
         }
-        binding?.listViewData?.setOnItemLongClickListener { _, _, _, _ ->
-            val selectedItemPosition = binding?.listViewData?.selectedItemPosition as Int
+        binding?.listViewData?.setOnItemLongClickListener {_, _, itemPosition, _ ->
+
             val alertDialog = AlertDialog.Builder(requireContext())
             alertDialog.setTitle("Delete Item")
             alertDialog.setMessage("Do you want to delete item")
             alertDialog.setPositiveButton("YES") { _, _ ->
-                studentArray.removeAt(selectedItemPosition)
+                studentArray.removeAt(itemPosition)
                 StudentAdapter.notifyDataSetChanged()
             }
             alertDialog.setNegativeButton("NO") { _, _ ->
             }
+            alertDialog.show()
             return@setOnItemLongClickListener true
+        }
+        binding?.btnAddinList?.setOnClickListener {
+            var customDialogBinding = CustomDialogSelectionBinding.inflate(layoutInflater)
+            var addDialog = Dialog(requireContext()).apply {
+                setContentView(customDialogBinding.root)
+                show()
+                window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT)
+                customDialogBinding.btnUpdate.setOnClickListener {
+                    if (customDialogBinding.etSelectedRoll.text.toString().isNullOrEmpty()) {
+                        customDialogBinding.etSelectedRoll.error = "Enter Roll No."
+                    } else if (customDialogBinding.etSelectedName.text.toString().isNullOrEmpty()) {
+                        customDialogBinding.etSelectedName.error = "Enter your Name"
+                    } else if (customDialogBinding.etSelectedCourse.text.toString()
+                            .isNullOrEmpty()
+                    ) {
+                        customDialogBinding.etSelectedCourse.error = "Enter the Course"
+                    } else{
+                        studentArray.add(StudentDataClass("${customDialogBinding.etSelectedRoll.text.toString()}",
+                            "${customDialogBinding.etSelectedName.text.toString()}",
+                            "${customDialogBinding.etSelectedCourse.text.toString()}"))
+                        StudentAdapter.notifyDataSetChanged()
+                        this.dismiss()
+                    }
+
+                }
+
+            }
         }
     }
 

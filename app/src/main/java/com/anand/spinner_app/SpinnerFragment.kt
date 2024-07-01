@@ -27,7 +27,6 @@ class SpinnerFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     var spinnerFragmentBinding: FragmentSpinnerFragmentBinding? = null
-    var navController: NavController? = null
     var cityarray = arrayListOf<String>()
     lateinit var arrayAdapter: ArrayAdapter<String>
 
